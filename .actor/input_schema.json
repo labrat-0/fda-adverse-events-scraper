@@ -1,0 +1,152 @@
+{
+    "title": "FDA Adverse Events Scraper - Input",
+    "description": "Search FDA Adverse Event Reporting System (FAERS) for drug safety signals, adverse reactions, and safety reports. Access drug safety data that pharmaceutical companies pay premium prices for. No API key required.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "mode": {
+            "sectionCaption": "Scraping Mode",
+            "sectionDescription": "Select what type of adverse event data to search for: general search, drug-focused, reaction-focused, or date range analysis.",
+            "title": "Scraping mode",
+            "type": "string",
+            "description": "Select the type of search: general events, drug-specific, reaction-specific, or date range analysis.",
+            "editor": "select",
+            "enum": ["search_events", "search_by_drug", "search_by_reaction", "search_by_date_range"],
+            "enumTitles": [
+                "Search Events (general keyword search)",
+                "Search by Drug (drug name, brand, generic)",
+                "Search by Reaction (adverse reaction/side effect)",
+                "Search by Date Range (temporal analysis)"
+            ],
+            "default": "search_events"
+        },
+        "query": {
+            "sectionCaption": "Search Parameters",
+            "sectionDescription": "Define your search criteria. Choose drug names, reactions, or general keywords to find relevant adverse event reports.",
+            "title": "General search query",
+            "type": "string",
+            "description": "General keyword search across all adverse event fields (drug names, reactions, descriptions).",
+            "editor": "textfield",
+            "prefill": "heart attack"
+        },
+        "drugName": {
+            "title": "Drug name",
+            "type": "string",
+            "description": "Medicinal product name (brand or generic). For search_by_drug mode. Example: 'LIPITOR', 'atorvastatin'",
+            "editor": "textfield"
+        },
+        "brandName": {
+            "title": "Brand name",
+            "type": "string",
+            "description": "Commercial brand name of the drug. Example: 'LIPITOR', 'PROZAC', 'VIAGRA'",
+            "editor": "textfield"
+        },
+        "genericName": {
+            "title": "Generic name",
+            "type": "string",
+            "description": "Generic/chemical name of the drug. Example: 'atorvastatin', 'fluoxetine', 'sildenafil'",
+            "editor": "textfield"
+        },
+        "reaction": {
+            "title": "Adverse reaction",
+            "type": "string",
+            "description": "Specific adverse reaction or side effect to search for. Required for search_by_reaction mode. Example: 'myocardial infarction', 'headache', 'nausea'",
+            "editor": "textfield"
+        },
+        "manufacturer": {
+            "title": "Drug manufacturer",
+            "type": "string",
+            "description": "Pharmaceutical company name. Example: 'Pfizer', 'Johnson & Johnson', 'Merck'",
+            "editor": "textfield"
+        },
+        "dateFrom": {
+            "title": "Date from",
+            "type": "string",
+            "description": "Start date for adverse events (YYYYMMDD format). Required for search_by_date_range mode. Example: '20220101'",
+            "editor": "textfield"
+        },
+        "dateTo": {
+            "title": "Date to",
+            "type": "string",
+            "description": "End date for adverse events (YYYYMMDD format). Required for search_by_date_range mode. Example: '20231231'",
+            "editor": "textfield"
+        },
+        "seriousOnly": {
+            "sectionCaption": "Filtering Options",
+            "sectionDescription": "Apply additional filters to focus on specific types of adverse events.",
+            "title": "Serious events only",
+            "type": "boolean",
+            "description": "Filter to show only serious adverse events (death, hospitalization, life-threatening, disability, congenital anomaly).",
+            "default": false
+        },
+        "country": {
+            "title": "Country",
+            "type": "string",
+            "description": "Filter by country code where the event occurred. Example: 'US', 'CA', 'GB', 'DE'",
+            "editor": "textfield"
+        },
+        "patientAgeMin": {
+            "title": "Min patient age",
+            "type": "integer",
+            "description": "Minimum patient age in years.",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 150
+        },
+        "patientAgeMax": {
+            "title": "Max patient age", 
+            "type": "integer",
+            "description": "Maximum patient age in years.",
+            "default": 150,
+            "minimum": 0,
+            "maximum": 150
+        },
+        "patientSex": {
+            "title": "Patient sex",
+            "type": "string",
+            "description": "Filter by patient gender.",
+            "editor": "select",
+            "enum": ["", "male", "female"],
+            "enumTitles": ["All", "Male", "Female"]
+        },
+        "maxResults": {
+            "sectionCaption": "Output Settings",
+            "sectionDescription": "Control how many adverse event reports are returned.",
+            "title": "Max results",
+            "type": "integer",
+            "description": "Maximum number of adverse event reports to return (1-1000). Free users are limited to 25 per run.",
+            "default": 100,
+            "prefill": 10,
+            "minimum": 1,
+            "maximum": 1000
+        },
+        "requestIntervalSecs": {
+            "sectionCaption": "Advanced Settings",
+            "sectionDescription": "Configure request behavior and performance.",
+            "title": "Request interval (seconds)",
+            "type": "number",
+            "description": "Minimum seconds between API requests. Lower is faster but may trigger rate limits.",
+            "default": 0.2,
+            "minimum": 0.1,
+            "maximum": 5
+        },
+        "timeoutSecs": {
+            "title": "HTTP timeout (seconds)",
+            "type": "integer",
+            "description": "Timeout for each HTTP request to the openFDA API.",
+            "default": 30,
+            "minimum": 5,
+            "maximum": 120
+        },
+        "maxRetries": {
+            "title": "Max retries",
+            "type": "integer",
+            "description": "Maximum retry attempts on failed or rate-limited requests.",
+            "default": 5,
+            "minimum": 0,
+            "maximum": 10
+        }
+    },
+    "required": ["mode"],
+    "additionalProperties": false
+}

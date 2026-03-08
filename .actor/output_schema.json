@@ -1,0 +1,218 @@
+{
+    "title": "FDA Adverse Event Report",
+    "description": "Structured adverse event report from the FDA Adverse Event Reporting System (FAERS)",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "schema_version": {
+            "title": "Schema version",
+            "type": "string",
+            "description": "Version of this data schema"
+        },
+        "type": {
+            "title": "Record type", 
+            "type": "string",
+            "description": "Type of record (adverse_event)"
+        },
+        "safety_report_id": {
+            "title": "Safety report ID",
+            "type": "string",
+            "description": "Unique FDA safety report identifier"
+        },
+        "safety_report_version": {
+            "title": "Report version",
+            "type": "string", 
+            "description": "Version number of this safety report"
+        },
+        "report_type": {
+            "title": "Report type",
+            "type": "string",
+            "description": "Type of adverse event report"
+        },
+        "receive_date": {
+            "title": "Receive date",
+            "type": "string",
+            "description": "Date FDA received the report (YYYYMMDD)"
+        },
+        "receipt_date": {
+            "title": "Receipt date", 
+            "type": "string",
+            "description": "Date report was received (YYYYMMDD)"
+        },
+        "transmission_date": {
+            "title": "Transmission date",
+            "type": "string", 
+            "description": "Date report was transmitted (YYYYMMDD)"
+        },
+        "primary_source_country": {
+            "title": "Primary source country",
+            "type": "string",
+            "description": "Country code of primary information source"
+        },
+        "occurrence_country": {
+            "title": "Occurrence country", 
+            "type": "string",
+            "description": "Country where adverse event occurred"
+        },
+        "serious": {
+            "title": "Serious event",
+            "type": "boolean",
+            "description": "Whether this is classified as a serious adverse event"
+        },
+        "seriousness_death": {
+            "title": "Death reported",
+            "type": "boolean",
+            "description": "Whether death was reported as an outcome"
+        },
+        "seriousness_life_threatening": {
+            "title": "Life threatening",
+            "type": "boolean", 
+            "description": "Whether event was life-threatening"
+        },
+        "seriousness_hospitalization": {
+            "title": "Hospitalization required",
+            "type": "boolean",
+            "description": "Whether hospitalization was required"
+        },
+        "seriousness_disabling": {
+            "title": "Disabling event",
+            "type": "boolean",
+            "description": "Whether event resulted in disability"
+        },
+        "seriousness_congenital_anomali": {
+            "title": "Congenital anomaly",
+            "type": "boolean",
+            "description": "Whether event involved congenital anomaly"
+        },
+        "seriousness_other": {
+            "title": "Other serious outcome",
+            "type": "boolean", 
+            "description": "Whether other serious medical outcome occurred"
+        },
+        "patient_age": {
+            "title": "Patient age",
+            "type": "string",
+            "description": "Patient age at time of adverse event"
+        },
+        "patient_age_unit": {
+            "title": "Age unit",
+            "type": "string",
+            "description": "Unit for patient age (years, months, days)"
+        },
+        "patient_sex": {
+            "title": "Patient sex",
+            "type": "string", 
+            "description": "Patient gender (Male/Female)"
+        },
+        "patient_weight": {
+            "title": "Patient weight",
+            "type": "string",
+            "description": "Patient weight"
+        },
+        "patient_weight_unit": {
+            "title": "Weight unit",
+            "type": "string",
+            "description": "Unit for patient weight"
+        },
+        "reactions": {
+            "title": "Adverse reactions",
+            "type": "array",
+            "description": "List of adverse reactions reported",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "reaction_term": {
+                        "title": "Reaction term",
+                        "type": "string",
+                        "description": "Medical term for the adverse reaction"
+                    },
+                    "reaction_outcome": {
+                        "title": "Reaction outcome", 
+                        "type": "string",
+                        "description": "Outcome of the adverse reaction"
+                    }
+                }
+            }
+        },
+        "drugs": {
+            "title": "Drugs involved",
+            "type": "array", 
+            "description": "List of drugs associated with this adverse event",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "drug_name": {
+                        "title": "Drug name",
+                        "type": "string",
+                        "description": "Name of the medicinal product"
+                    },
+                    "brand_name": {
+                        "title": "Brand name",
+                        "type": "string", 
+                        "description": "Commercial brand name"
+                    },
+                    "generic_name": {
+                        "title": "Generic name",
+                        "type": "string",
+                        "description": "Generic/chemical name"
+                    },
+                    "manufacturer": {
+                        "title": "Manufacturer",
+                        "type": "string",
+                        "description": "Drug manufacturer"
+                    },
+                    "dose": {
+                        "title": "Dose",
+                        "type": "string", 
+                        "description": "Drug dosage information"
+                    },
+                    "route": {
+                        "title": "Administration route",
+                        "type": "string",
+                        "description": "Route of drug administration"
+                    },
+                    "indication": {
+                        "title": "Indication",
+                        "type": "string",
+                        "description": "Medical condition drug was prescribed for"
+                    },
+                    "start_date": {
+                        "title": "Start date",
+                        "type": "string",
+                        "description": "Date drug treatment started"
+                    },
+                    "end_date": {
+                        "title": "End date", 
+                        "type": "string",
+                        "description": "Date drug treatment ended"
+                    },
+                    "characterization": {
+                        "title": "Drug characterization",
+                        "type": "string",
+                        "description": "Whether drug is suspect, concomitant, or interacting"
+                    }
+                }
+            }
+        },
+        "company_number": {
+            "title": "Company number",
+            "type": "string",
+            "description": "Company identifier for the report"
+        },
+        "sender_organization": {
+            "title": "Sender organization", 
+            "type": "string",
+            "description": "Organization that sent the report"
+        },
+        "reporter_country": {
+            "title": "Reporter country",
+            "type": "string", 
+            "description": "Country of the person reporting the event"
+        },
+        "reporter_qualification": {
+            "title": "Reporter qualification",
+            "type": "string",
+            "description": "Professional qualification of the reporter"
+        }
+    }
+}

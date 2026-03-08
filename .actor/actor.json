@@ -1,0 +1,34 @@
+{
+    "actorSpecification": 1,
+    "name": "labrat011/fda-adverse-events-scraper",
+    "title": "FDA Adverse Events Scraper",
+    "description": "Scrape FDA Adverse Event Reporting System (FAERS) for drug safety signals, adverse reactions, and safety reports. Access pharmaceutical safety data that companies pay premium prices for. No API key required - uses free openFDA API.",
+    "version": "1.0",
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "views": {
+                "overview": {
+                    "title": "Overview",
+                    "transformation": {
+                        "fields": ["safety_report_id", "receive_date", "serious", "patient_age", "patient_sex", "reactions", "drugs"]
+                    }
+                },
+                "serious-events": {
+                    "title": "Serious Events",
+                    "transformation": {
+                        "fields": ["safety_report_id", "receive_date", "seriousness_death", "seriousness_life_threatening", "seriousness_hospitalization", "reactions", "drugs"],
+                        "filter": "serious = true"
+                    }
+                },
+                "drug-analysis": {
+                    "title": "Drug Analysis",
+                    "transformation": {
+                        "fields": ["drugs", "reactions", "serious", "patient_age", "patient_sex"]
+                    }
+                }
+            }
+        }
+    },
+    "dockerfile": "./.actor/Dockerfile"
+}

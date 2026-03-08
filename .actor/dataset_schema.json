@@ -1,0 +1,8 @@
+{
+    "title": "FDA Adverse Events Dataset",
+    "type": "array",
+    "description": "Dataset of adverse event reports from the FDA Adverse Event Reporting System (FAERS)",
+    "items": {
+        "$ref": "output_schema.json"
+    }
+}
