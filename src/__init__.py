@@ -1,1 +1,1 @@
-# FDA Adverse Events Scraper
+"""FDA Adverse Events Scraper package."""
