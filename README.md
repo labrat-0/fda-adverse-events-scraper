@@ -29,25 +29,99 @@ Perfect for **pharmaceutical companies**, **biotech firms**, **researchers**, an
 - **Batch Processing** - Efficiently handles large datasets
 - **Free Tier Available** - 25 results per run for free users
 
-## 📊 Use Cases & ROI
+## 👥 Who Uses This
 
-### Pharmaceutical Industry
-- **Drug Safety Monitoring** - Track adverse events for your products vs competitors
-- **Competitive Intelligence** - Analyze competitor drug safety profiles  
-- **Regulatory Preparation** - Gather safety data for FDA submissions
-- **Post-Market Surveillance** - Monitor real-world safety signals
+### 🔬 Pharmacovigilance and Drug Safety Teams
 
-### Biotech & Research
-- **Target Validation** - Identify safety risks for drug targets
-- **Portfolio Risk Assessment** - Evaluate pipeline compound safety
-- **Literature Review** - Supplement clinical data with real-world evidence
-- **Partnership Due Diligence** - Assess safety profiles before licensing deals
+You're running signal detection — monitoring adverse event frequencies, tracking serious events (death, hospitalization, disability), and identifying emerging safety patterns before they become regulatory problems. FAERS has millions of reports. This actor gives you structured, filterable access to all of it.
 
-### Healthcare Organizations  
-- **Formulary Decisions** - Make evidence-based drug selection
-- **Patient Safety Programs** - Identify emerging safety signals
-- **Quality Assurance** - Monitor medication error patterns
-- **Risk Management** - Quantify adverse event frequencies
+```json
+{
+    "mode": "search_by_drug",
+    "drugName": "OZEMPIC",
+    "seriousOnly": true,
+    "maxResults": 500
+}
+```
+
+Filter by `seriousOnly` to focus on death/hospitalization/disability events. Use `search_by_reaction` mode to find all drugs associated with a specific adverse reaction — useful for class-effect signal detection.
+
+---
+
+### 💼 Pharma Competitive Intelligence Teams
+
+You want to understand the real-world safety profile of a competitor's drug — not just what's on the label, but what's being reported post-market. FAERS data often surfaces signals years before label updates. This is the same data pharma companies pay $30K+/year to access through commercial databases.
+
+```json
+{
+    "mode": "search_by_drug",
+    "drugName": "WEGOVY",
+    "country": "US",
+    "maxResults": 1000
+}
+```
+
+Compare adverse event frequencies across competing drugs in the same class. Combine with FDA Drug Labels to cross-reference whether reported reactions are already captured in the label or represent unlabeled findings.
+
+---
+
+### 🏢 Biotech and Clinical-Stage Companies
+
+You're doing due diligence on a licensing target, assessing portfolio compound risk, or preparing regulatory submissions. FAERS provides real-world safety evidence to supplement clinical trial data — and it's free, public, and updated quarterly.
+
+```json
+{
+    "mode": "search_by_date_range",
+    "dateFrom": "2023-01-01",
+    "dateTo": "2024-01-01",
+    "drugName": "KEYTRUDA",
+    "maxResults": 500
+}
+```
+
+Date-range queries let you track how the safety profile of a compound evolves over time — useful for longitudinal analyses in regulatory submissions or pre-licensing technical assessments.
+
+---
+
+### 📰 Healthcare Policy Researchers and Journalists
+
+You're investigating drug safety patterns at the population level — which drugs generate the most serious adverse event reports, which manufacturers have the highest report volumes, which reactions are disproportionately associated with specific compounds.
+
+```json
+{
+    "mode": "search_by_reaction",
+    "reactionName": "suicidal ideation",
+    "seriousOnly": true,
+    "maxResults": 1000
+}
+```
+
+Use `search_by_reaction` to find all drugs associated with a specific reaction type. The report source, patient demographics, and outcome fields provide context for investigative analysis without requiring access to commercial pharmacovigilance databases.
+
+---
+
+### 🤖 AI/LLM Engineers and Medical AI Builders
+
+You're building medical AI pipelines that need access to real-world safety data — not just label text, but post-market reports. FAERS data as a RAG source or MCP tool grounds your agent in actual pharmacovigilance evidence.
+
+**MCP tool config:**
+
+```json
+{
+    "mcpServers": {
+        "fda-adverse-events": {
+            "url": "https://mcp.apify.com?tools=labrat011/fda-adverse-events-scraper",
+            "headers": {
+                "Authorization": "Bearer <APIFY_TOKEN>"
+            }
+        }
+    }
+}
+```
+
+Combine with FDA Drug Labels and Clinical Trials Scraper for a complete drug safety intelligence stack accessible to your AI agent.
+
+---
 
 ## 🎯 Input Configuration
 
@@ -267,6 +341,18 @@ Part of our **Healthcare Data Intelligence Suite**:
 - [FDA Drug Labels Scraper](https://apify.com/labrat011/fda-drug-labels-scraper) - Drug labeling info
 - [FDA Orange Book Scraper](https://apify.com/labrat011/fda-orange-book-scraper) - Patent/exclusivity data  
 - [PubMed Scraper](https://apify.com/labrat011/pubmed-scraper) - Scientific literature
+
+## 🔗 Related Actors
+
+| Actor | What it does | Pairs well when... |
+|-------|-------------|---------------------|
+| [FDA Drug Labels Scraper](https://apify.com/labrat011/fda-drug-labels-scraper) | FDA-approved drug labeling data | Cross-reference reported adverse reactions with the drug's official label warnings |
+| [FDA Orange Book Scraper](https://apify.com/labrat011/fda-orange-book-scraper) | Patent, exclusivity, and generic data | Check market status of drugs generating high adverse event volumes |
+| [Clinical Trials Scraper](https://apify.com/labrat011/clinical-trials-scraper) | ClinicalTrials.gov study data | Find active safety monitoring trials for drugs with FAERS signals |
+| [PubMed Scraper](https://apify.com/labrat011/pubmed-scraper) | 35M+ biomedical abstracts from NCBI | Find published literature on safety signals identified in FAERS data |
+| [NPI Provider Contact Finder](https://apify.com/labrat011/npi-provider-contact-finder) | Healthcare provider directory | Identify prescribers in areas with high adverse event report concentrations |
+
+---
 
 ## ⚖️ Legal & Compliance
 
